@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>RS·EXPERIENCES</title>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style id="dynamic-fonts"></style>
+<style>
+/* ──────────────────────────────────────────
+   RS·EXPERIENCES TEMPLATE v1.0
+   RUBIK SOTA — rubik-sota.com — 629 554 870
+   ────────────────────────────────────────── */
+:root {
+  --primary:    #ff512f;
+  --secondary:  #f09819;
+  --font-body:  'Quicksand', sans-serif;
+  --font-title: 'Salsa', cursive;
+  --bg-filter:  brightness(90%);
+  --anim-dur:   3s;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { min-height: 100vh; background: #232328; font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+
+/* ── SLIDER ── */
+.swiper-container { width: 100%; height: 100vh; overflow: hidden; }
+.swiper-slide { position: relative; width: 100%; height: 100vh; }
+
+/* ── CONTENT ── */
+.content {
+  position: absolute; display: flex; flex-direction: column;
+  align-items: center; top: 14%; left: 3%; width: 40%;
+  height: max-content; color: #f2f2f2; text-align: center;
+  padding: 20px; opacity: 0; z-index: 2;
+}
+.content h1 {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 3vw, 6rem);
+  margin-bottom: 20px; opacity: 0;
+}
+.content p {
+  font-family: var(--font-body);
+  font-size: 1.2rem; line-height: 1.4; font-weight: 500; opacity: 0;
+}
+.swiper-slide-active .content { opacity: 1; }
+.swiper-slide-active .content h1 { animation: moveDown 0.8s ease-in forwards; }
+.swiper-slide-active .content p  { animation: moveDown 1s ease-in forwards; animation-delay: 1s; }
+@keyframes moveDown {
+  0%   { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0);     opacity: 1; }
+}
+
+/* ── MEDIA ── */
+.slide-media {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; filter: var(--bg-filter); z-index: 1;
+}
+.slide-media.animation { animation: resizeClipPath var(--anim-dur) ease-in-out forwards; }
+@keyframes resizeClipPath {
+  0%   { clip-path: circle(5%);  opacity: 0; }
+  100% { clip-path: circle(71%); opacity: 1; }
+}
+.slide-bg-placeholder { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+
+/* ── PAGINATION ── */
+.swiper-pagination-bullet {
+  width: 16px; height: 16px; background-color: #a3a6a3;
+  border-radius: 50%; transition: all 0.6s ease-in-out;
+}
+.swiper-pagination-bullet-active {
+  height: 32px;
+  background-image: linear-gradient(180deg, var(--secondary) 0%, var(--primary) 100%);
+  border-radius: 14px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  position: absolute; display: flex; justify-content: space-between;
+  column-gap: 20px; bottom: 0; left: 50%; transform: translate(-50%, 0);
+  width: max-content; padding: 20px; color: #f2f2f2;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px); z-index: 2;
+}
+.feature { display: flex; align-items: center; column-gap: 12px; }
+.feature i { font-size: 1.4rem; }
+.feature p { font-weight: 700; }
+.btn {
+  display: block; font-weight: 700; text-align: center;
+  text-transform: uppercase; color: #fff; padding: 15px 20px;
+  border: 0; border-radius: 10px; font-family: var(--font-body);
+  background-image: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 51%, var(--primary) 100%);
+  background-size: 200% auto; cursor: pointer; transition: 0.5s;
+  text-decoration: none; white-space: nowrap;
+}
+.btn:hover  { background-position: right center; }
+.btn:active { transform: scale(0.95); }
+
+/* ── LOGO ── */
+.logo { position: fixed; right: -20px; bottom: -35px; z-index: 10; }
+.logo img { width: 120px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1200px) {
+  .content { top: 18%; }
+}
+@media (max-width: 900px) {
+  .content { top: 55%; left: 2%; width: 60%; }
+  .content h1 { margin-bottom: 14px; }
+  .content p  { font-size: 1rem; }
+  .feature i  { font-size: 1.3rem; }
+  .feature p  { font-size: 1rem; }
+  .btn { padding: 8px 16px; }
+}
+@media (max-width: 790px) {
+  .footer { column-gap: 10px; }
+  .feature i  { font-size: 1.1rem; }
+  .feature p  { font-size: 0.9rem; }
+  .feature small { font-size: 0.8rem; }
+  .btn { font-size: 0.8rem; padding: 8px 12px; }
+}
+@media (max-width: 660px) {
+  .content { top: unset; left: 2%; bottom: 3%; width: 80%; }
+  .content p { font-size: 0.9rem; line-height: 1.2; }
+  .swiper-pagination-bullet { width: 12px; height: 12px; }
+  .swiper-pagination-bullet-active { height: 24px; }
+  .footer {
+    column-gap: 0; left: unset; bottom: unset; top: 20px; right: -30px;
+    padding: 0; border-radius: 0; border: 0; background: transparent; backdrop-filter: none;
+  }
+  .feature, hr { display: none; }
+}
+@media (max-width: 890px) {
+  .logo { right: -10px; bottom: -20px; }
+  .logo img { width: 80px; }
+}
+
+/* ═══════════════════════════════════════════
+   EDITOR STYLES (only active with ?edit)
+═══════════════════════════════════════════ */
+#rs-editor {
+  position: fixed; top: 20px; right: 20px;
+  width: 420px; max-width: 90vw; max-height: 88vh;
+  overflow-y: auto; z-index: 9999;
+  background: #0f0f14; color: #f0ede8;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  display: none;
+}
+#rs-editor.open { display: block; }
+
+/* Editor scrollbar */
+#rs-editor::-webkit-scrollbar { width: 4px; }
+#rs-editor::-webkit-scrollbar-track { background: transparent; }
+#rs-editor::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+.ed-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; background: #1a1a22;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  position: sticky; top: 0; z-index: 2;
+}
+.ed-brand { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #ff4c1f; }
+.ed-close { background: transparent; border: none; color: #888; font-size: 18px; cursor: pointer; line-height: 1; }
+.ed-close:hover { color: #f0ede8; }
+
+.ed-tabs { display: flex; border-bottom: 1px solid rgba(255,255,255,0.07); background: #141418; }
+.ed-tab {
+  flex: 1; padding: 10px 6px; text-align: center;
+  font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: #888; cursor: pointer; transition: color .15s;
+  border-bottom: 2px solid transparent;
+}
+.ed-tab:hover { color: #f0ede8; }
+.ed-tab.active { color: #ff4c1f; border-bottom-color: #ff4c1f; }
+
+.ed-panel { display: none; padding: 16px; }
+.ed-panel.active { display: block; }
+
+.ed-section {
+  font-size: 9px; letter-spacing: .13em; text-transform: uppercase;
+  color: #505058; font-weight: 500; padding: 12px 0 8px;
+  border-top: 1px solid rgba(255,255,255,0.06); margin-bottom: 6px;
+}
+.ed-section:first-child { border-top: none; padding-top: 0; }
+
+.ed-field { margin-bottom: 13px; }
+.ed-label { display: block; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: #888; margin-bottom: 5px; }
+.ed-input {
+  width: 100%; background: #1c1c24; border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 5px; padding: 8px 10px; font-size: 13px; color: #f0ede8;
+  font-family: inherit; outline: none; transition: border-color .2s;
+}
+.ed-input:focus { border-color: #ff4c1f; }
+.ed-textarea { min-height: 72px; resize: vertical; }
+.ed-select {
+  width: 100%; background: #1c1c24; border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 5px; padding: 8px 10px; font-size: 13px; color: #f0ede8;
+  font-family: inherit; outline: none; cursor: pointer;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+}
+.ed-color-row { display: flex; gap: 8px; align-items: center; }
+.ed-swatch { width: 34px; height: 34px; border-radius: 5px; border: 2px solid rgba(255,255,255,0.12); position: relative; overflow: hidden; flex-shrink: 0; cursor: pointer; }
+.ed-swatch input[type=color] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.ed-color-val { font-size: 12px; color: #888; font-family: monospace; }
+
+.ed-slide-item {
+  display: flex; align-items: center; gap: 8px;
+  background: #1c1c24; border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 5px; padding: 10px; margin-bottom: 6px; cursor: pointer;
+}
+.ed-slide-item:hover { border-color: rgba(255,255,255,0.15); }
+.ed-slide-item.active { border-color: #ff4c1f; }
+.ed-slide-num {
+  width: 18px; height: 18px; border-radius: 3px; background: #2c2c38;
+  font-size: 10px; display: flex; align-items: center; justify-content: center;
+  color: #888; flex-shrink: 0; font-family: monospace;
+}
+.ed-slide-title { font-size: 12px; font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ed-slide-del { background: transparent; border: none; color: #ff6060; cursor: pointer; font-size: 12px; padding: 2px 4px; }
+
+.ed-upload {
+  border: 1.5px dashed rgba(255,255,255,0.15); border-radius: 5px;
+  padding: 18px; text-align: center; cursor: pointer; position: relative;
+  background: #1a1a22; transition: border-color .2s;
+}
+.ed-upload:hover { border-color: rgba(255,76,31,0.5); }
+.ed-upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.ed-upload-icon { font-size: 20px; color: #505058; margin-bottom: 6px; display: block; }
+.ed-upload-text { font-size: 11px; color: #888; }
+.ed-img-preview { width: 100%; height: 55px; object-fit: cover; border-radius: 4px; display: block; margin-top: 8px; }
+
+.ed-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; padding: 10px; border-radius: 5px; cursor: pointer;
+  font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  transition: all .2s; font-family: inherit;
+}
+.ed-btn-primary { background: #ff4c1f; color: white; border: none; }
+.ed-btn-primary:hover { background: #ff8040; }
+.ed-btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: #f0ede8; }
+.ed-btn-ghost:hover { border-color: rgba(255,255,255,0.35); }
+.ed-btn-dashed { background: transparent; border: 1.5px dashed rgba(255,76,31,0.3); color: #ff4c1f; }
+.ed-btn-dashed:hover { background: rgba(255,76,31,0.07); }
+.ed-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+
+.ed-slide-editor { padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 12px; display: none; }
+.ed-slide-editor.open { display: block; }
+
+.ed-font-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.ed-font-opt {
+  background: #1c1c24; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 5px; padding: 8px; cursor: pointer; text-align: center; transition: all .15s;
+}
+.ed-font-opt:hover { border-color: rgba(255,255,255,0.2); }
+.ed-font-opt.active { border-color: #ff4c1f; background: rgba(255,76,31,0.07); }
+.ed-font-name { font-size: 14px; color: #f0ede8; }
+.ed-font-label { font-size: 9px; color: #888; text-transform: uppercase; letter-spacing: .08em; margin-top: 2px; }
+
+.ed-toast {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(60px);
+  background: #1c1c24; border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; padding: 10px 20px; font-size: 13px; color: #f0ede8;
+  z-index: 10000; opacity: 0; transition: all .3s; pointer-events: none;
+  white-space: nowrap;
+}
+.ed-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* Edit mode indicator */
+#edit-badge {
+  position: fixed; bottom: 24px; left: 24px; z-index: 9998;
+  background: rgba(255,76,31,0.9); color: white;
+  font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: 8px 16px; border-radius: 100px; cursor: pointer;
+  display: none; align-items: center; gap: 8px;
+  box-shadow: 0 4px 20px rgba(255,76,31,0.4);
+}
+#edit-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1}50%{opacity:0.4} }
+</style>
+</head>
+<body>
+
+<!-- MAIN SLIDER -->
+<div class="swiper-container">
+  <div class="swiper-wrapper" id="swiper-wrapper"></div>
+  <div class="swiper-pagination"></div>
+</div>
+<div class="footer" id="footer"></div>
+<a href="#" id="logo-link" class="logo" target="_blank" style="display:none">
+  <img id="logo-img" src="" alt="Logo">
+</a>
+
+<!-- EDIT MODE BADGE -->
+<div id="edit-badge" onclick="toggleEditor()">
+  <i class="fa-solid fa-pen"></i> Modo Editor
+</div>
+
+<!-- ═══════════════════════════════════════════
+     EDITOR PANEL
+═══════════════════════════════════════════ -->
+<div id="rs-editor">
+  <div class="ed-header">
+    <span class="ed-brand">RS·STUDIO Editor</span>
+    <button class="ed-close" onclick="toggleEditor()">×</button>
+  </div>
+
+  <div class="ed-tabs">
+    <div class="ed-tab active" data-tab="slides" onclick="edTab('slides')">Slides</div>
+    <div class="ed-tab" data-tab="tema" onclick="edTab('tema')">Tema</div>
+    <div class="ed-tab" data-tab="footer" onclick="edTab('footer')">Footer</div>
+  </div>
+
+  <!-- TAB SLIDES -->
+  <div class="ed-panel active" id="edp-slides">
+    <div class="ed-section">Diapositivas</div>
+    <div id="ed-slides-list"></div>
+    <button class="ed-btn ed-btn-dashed" onclick="edAddSlide()" style="margin-top:8px">
+      <i class="fa-solid fa-plus"></i> Añadir diapositiva
+    </button>
+
+    <!-- Slide inline editor -->
+    <div class="ed-slide-editor" id="ed-slide-editor">
+      <div class="ed-section" id="ed-slide-label">Slide #1</div>
+      <div class="ed-field"><label class="ed-label">Título</label><input class="ed-input" id="eds-title" oninput="edUpdateSlide('title',this.value)"></div>
+      <div class="ed-field"><label class="ed-label">Descripción</label><textarea class="ed-input ed-textarea" id="eds-desc" oninput="edUpdateSlide('description',this.value)"></textarea></div>
+      <div class="ed-field">
+        <label class="ed-label">Tipo de media</label>
+        <select class="ed-select" id="eds-type" onchange="edUpdateSlide('type',this.value)">
+          <option value="image">Imagen</option>
+          <option value="video">Vídeo (URL)</option>
+        </select>
+      </div>
+      <div id="eds-img-wrap">
+        <div class="ed-field">
+          <label class="ed-label">Imagen de fondo</label>
+          <div class="ed-upload" onclick="document.getElementById('eds-file').click()">
+            <input type="file" accept="image/*" id="eds-file" style="display:none" onchange="edUploadImage(this)">
+            <i class="fa-solid fa-cloud-arrow-up ed-upload-icon"></i>
+            <div class="ed-upload-text">Clic para subir imagen<br><small>JPG, PNG, WEBP — máx 5MB</small></div>
+          </div>
+          <div id="eds-preview" style="display:none">
+            <img id="eds-preview-img" class="ed-img-preview" alt="">
+            <button onclick="edClearImg()" style="background:none;border:none;color:#888;font-size:11px;margin-top:4px;cursor:pointer">× Eliminar</button>
+          </div>
+        </div>
+        <div class="ed-field"><label class="ed-label">Posición (ej: 50% 40%)</label><input class="ed-input" id="eds-pos" placeholder="50% 50%" oninput="edUpdateSlide('position',this.value)"></div>
+      </div>
+      <div id="eds-vid-wrap" style="display:none">
+        <div class="ed-field"><label class="ed-label">URL del vídeo (mp4, embed...)</label><input class="ed-input" id="eds-vidurl" placeholder="https://..." oninput="edUpdateSlide('videoUrl',this.value)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB TEMA -->
+  <div class="ed-panel" id="edp-tema">
+    <div class="ed-section">Colores</div>
+    <div class="ed-field">
+      <label class="ed-label">Color primario</label>
+      <div class="ed-color-row">
+        <div class="ed-swatch" id="esw1"><input type="color" id="ecp" value="#ff512f" oninput="edApplyTheme()"></div>
+        <span class="ed-color-val" id="ecpv">#ff512f</span>
+      </div>
+    </div>
+    <div class="ed-field">
+      <label class="ed-label">Color secundario</label>
+      <div class="ed-color-row">
+        <div class="ed-swatch" id="esw2"><input type="color" id="ecs" value="#f09819" oninput="edApplyTheme()"></div>
+        <span class="ed-color-val" id="ecsv">#f09819</span>
+      </div>
+    </div>
+    <div class="ed-section">Fuente de títulos</div>
+    <div class="ed-font-grid" id="efg-title">
+      <div class="ed-font-opt active" onclick="edFont('title','Salsa')" style="font-family:'Salsa',cursive"><div class="ed-font-name">Salsa</div><div class="ed-font-label">Display</div></div>
+      <div class="ed-font-opt" onclick="edFont('title','Syne')" style="font-family:'Syne',sans-serif"><div class="ed-font-name">Syne</div><div class="ed-font-label">Modern</div></div>
+      <div class="ed-font-opt" onclick="edFont('title','Playfair Display')" style="font-family:'Playfair Display',serif"><div class="ed-font-name">Playfair</div><div class="ed-font-label">Editorial</div></div>
+      <div class="ed-font-opt" onclick="edFont('title','Bebas Neue')" style="font-family:'Bebas Neue',cursive"><div class="ed-font-name">Bebas</div><div class="ed-font-label">Impacto</div></div>
+    </div>
+    <div class="ed-section">Fuente de texto</div>
+    <div class="ed-font-grid" id="efg-body">
+      <div class="ed-font-opt active" onclick="edFont('body','Quicksand')" style="font-family:'Quicksand',sans-serif"><div class="ed-font-name">Quicksand</div><div class="ed-font-label">Friendly</div></div>
+      <div class="ed-font-opt" onclick="edFont('body','DM Sans')" style="font-family:'DM Sans',sans-serif"><div class="ed-font-name">DM Sans</div><div class="ed-font-label">Clean</div></div>
+      <div class="ed-font-opt" onclick="edFont('body','Lato')" style="font-family:'Lato',sans-serif"><div class="ed-font-name">Lato</div><div class="ed-font-label">Legible</div></div>
+      <div class="ed-font-opt" onclick="edFont('body','Nunito')" style="font-family:'Nunito',sans-serif"><div class="ed-font-name">Nunito</div><div class="ed-font-label">Rounded</div></div>
+    </div>
+    <div class="ed-section">Efectos</div>
+    <div class="ed-field">
+      <label class="ed-label">Filtro de imagen</label>
+      <select class="ed-select" id="ebgf" onchange="edApplyTheme()">
+        <option value="brightness(90%)">Oscuro (recomendado)</option>
+        <option value="brightness(70%)">Muy oscuro</option>
+        <option value="brightness(100%)">Sin filtro</option>
+        <option value="brightness(90%) saturate(1.3)">Saturado</option>
+        <option value="brightness(80%) grayscale(0.3)">Desaturado</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- TAB FOOTER -->
+  <div class="ed-panel" id="edp-footer">
+    <div class="ed-section">Características</div>
+    <div id="ed-footer-list"></div>
+    <button class="ed-btn ed-btn-dashed" onclick="edAddFeature()" style="margin-top:8px">
+      <i class="fa-solid fa-plus"></i> Añadir ítem
+    </button>
+    <div class="ed-section">Botón</div>
+    <div class="ed-field"><label class="ed-label">Texto del botón</label><input class="ed-input" id="efbt" oninput="edRebuildFooter()"></div>
+    <div class="ed-field"><label class="ed-label">URL / WhatsApp link</label><input class="ed-input" id="efbl" placeholder="https://wa.me/34629554870" oninput="edRebuildFooter()"></div>
+    <div class="ed-section">Logo</div>
+    <div class="ed-field">
+      <label class="ed-label">Logo (imagen)</label>
+      <div class="ed-upload" onclick="document.getElementById('logo-file').click()">
+        <input type="file" accept="image/*" id="logo-file" style="display:none" onchange="edUploadLogo(this)">
+        <i class="fa-solid fa-image ed-upload-icon"></i>
+        <div class="ed-upload-text">Subir logo del cliente</div>
+      </div>
+      <div id="ed-logo-prev" style="display:none"><img id="ed-logo-img" style="max-height:36px;margin-top:8px;display:block" alt=""></div>
+    </div>
+    <div class="ed-field"><label class="ed-label">URL del logo (alternativa)</label><input class="ed-input" id="elogu" placeholder="https://..." oninput="edUpdateLogoFromUrl()"></div>
+    <div class="ed-section">Acciones</div>
+    <div class="ed-actions">
+      <button class="ed-btn ed-btn-ghost" onclick="edSaveLocal()"><i class="fa-solid fa-floppy-disk"></i> Guardar local</button>
+      <button class="ed-btn ed-btn-primary" onclick="edDownloadConfig()"><i class="fa-solid fa-download"></i> config.json</button>
+    </div>
+    <div style="margin-top:8px">
+      <button class="ed-btn ed-btn-ghost" onclick="edReset()" style="color:#ff8080;border-color:rgba(255,80,80,0.3)">
+        <i class="fa-solid fa-rotate-left"></i> Restaurar original
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EDITOR TOAST -->
+<div class="ed-toast" id="ed-toast"></div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+// ═══════════════════════════════════════════
+//   RS·EXPERIENCES — MAIN + EDITOR ENGINE
+//   RUBIK SOTA — 629 554 870
+// ═══════════════════════════════════════════
+
+let CONFIG = null;
+let swiperInstance = null;
+let edCurrentSlide = null;
+
+// ── BOOT ─────────────────────────────────
+async function boot() {
+  // Load config: localStorage first, then config.json
+  const stored = localStorage.getItem('rs_config');
+  if (stored) {
+    try { CONFIG = JSON.parse(stored); }
+    catch(e) { CONFIG = null; }
+  }
+  if (!CONFIG) {
+    try {
+      const r = await fetch('config.json');
+      CONFIG = await r.json();
+    } catch(e) {
+      CONFIG = defaultConfig();
+    }
+  }
+  applyFonts();
+  applyCSSVars();
+  buildSlider();
+  buildFooter();
+  buildLogo();
+  initSwiper();
+  // Check for ?edit
+  if (new URLSearchParams(window.location.search).has('edit')) {
+    document.getElementById('edit-badge').style.display = 'flex';
+    openEditor();
+  }
+}
+
+function defaultConfig() {
+  return {
+    theme:{primaryColor:'#ff512f',secondaryColor:'#f09819',fontFamily:"'Quicksand',sans-serif",titleFont:"'Salsa',cursive",backgroundFilter:'brightness(90%)',animationDuration:'3s',sliderSpeed:1000},
+    slider:{direction:'vertical',effect:'fade',speed:1000,loop:true,mousewheel:true},
+    slides:[{title:'Tu Negocio',description:'Edita este contenido desde el panel.',media:{type:'image',url:'',position:'50% 50%'}}],
+    footer:{features:[{icon:'fa-house',label:'Servicio',detail:'detalle'},{icon:'fa-clock',label:'Horario',detail:'9-20h'}],button:{text:'Contactar',link:'#'}},
+    logo:{image:'',link:'#',alt:'Logo'}
+  };
+}
+
+// ── CSS VARS ─────────────────────────────
+function applyCSSVars() {
+  const r = document.documentElement;
+  r.style.setProperty('--primary', CONFIG.theme.primaryColor);
+  r.style.setProperty('--secondary', CONFIG.theme.secondaryColor);
+  r.style.setProperty('--font-body', CONFIG.theme.fontFamily);
+  r.style.setProperty('--font-title', CONFIG.theme.titleFont);
+  r.style.setProperty('--bg-filter', CONFIG.theme.backgroundFilter);
+  r.style.setProperty('--anim-dur', CONFIG.theme.animationDuration);
+}
+
+// ── GOOGLE FONTS ─────────────────────────
+function applyFonts() {
+  const fonts = [];
+  if (CONFIG.theme.titleFont) {
+    const f = CONFIG.theme.titleFont.replace(/'/g,'').split(',')[0].trim();
+    fonts.push(f);
+  }
+  if (CONFIG.theme.fontFamily) {
+    const f = CONFIG.theme.fontFamily.replace(/'/g,'').split(',')[0].trim();
+    if (!fonts.includes(f)) fonts.push(f);
+  }
+  const link = document.getElementById('dynamic-fonts');
+  if (fonts.length) {
+    const params = fonts.map(f => 'family=' + encodeURIComponent(f) + ':wght@400;600;700;800').join('&');
+    link.textContent = `@import url('https://fonts.googleapis.com/css2?${params}&display=swap');`;
+  }
+}
+
+// ── BUILD SLIDER ─────────────────────────
+function buildSlider() {
+  const wrapper = document.getElementById('swiper-wrapper');
+  wrapper.innerHTML = '';
+  CONFIG.slides.forEach((slide, idx) => {
+    const div = document.createElement('div');
+    div.className = 'swiper-slide';
+    // Content
+    const content = document.createElement('div');
+    content.className = 'content';
+    content.setAttribute('data-content', 'slide-' + idx);
+    content.innerHTML = `<h1>${esc(slide.title)}</h1><p>${esc(slide.description)}</p>`;
+    div.appendChild(content);
+    // Media
+    let media;
+    if (slide.media.type === 'video' && slide.media.url) {
+      media = document.createElement('video');
+      media.src = slide.media.url;
+      media.autoplay = true; media.loop = true; media.muted = true; media.playsInline = true;
+    } else if (slide.media.url) {
+      media = document.createElement('img');
+      media.src = slide.media.url;
+      media.alt = slide.title || '';
+      if (slide.media.position) media.style.objectPosition = slide.media.position;
+    } else {
+      media = document.createElement('div');
+      media.classList.add('slide-bg-placeholder');
+    }
+    media.className = (media.className || '') + ' slide-media';
+    media.setAttribute('data-item', 'slide-' + idx);
+    div.appendChild(media);
+    wrapper.appendChild(div);
+  });
+}
+
+// ── BUILD FOOTER ─────────────────────────
+function buildFooter() {
+  const footer = document.getElementById('footer');
+  footer.innerHTML = '';
+  CONFIG.footer.features.forEach(f => {
+    const feat = document.createElement('div');
+    feat.className = 'feature';
+    feat.innerHTML = `<i class="fa-solid ${f.icon}"></i><div><p>${esc(f.label)}</p><small>${esc(f.detail)}</small></div>`;
+    footer.appendChild(feat);
+    footer.appendChild(document.createElement('hr'));
+  });
+  const btn = document.createElement(CONFIG.footer.button.link !== '#' ? 'a' : 'button');
+  btn.className = 'btn';
+  btn.textContent = CONFIG.footer.button.text;
+  if (CONFIG.footer.button.link !== '#') { btn.href = CONFIG.footer.button.link; btn.target = '_blank'; }
+  else { btn.onclick = () => window.location.href = CONFIG.footer.button.link; }
+  footer.appendChild(btn);
+}
+
+// ── BUILD LOGO ───────────────────────────
+function buildLogo() {
+  const link = document.getElementById('logo-link');
+  const img = document.getElementById('logo-img');
+  if (CONFIG.logo.image) {
+    link.href = CONFIG.logo.link;
+    img.src = CONFIG.logo.image;
+    img.alt = CONFIG.logo.alt;
+    link.style.display = '';
+  } else {
+    link.style.display = 'none';
+  }
+}
+
+// ── SWIPER ───────────────────────────────
+function initSwiper() {
+  if (swiperInstance) { swiperInstance.destroy(true, true); swiperInstance = null; }
+  const opts = {
+    direction: CONFIG.slider.direction,
+    effect: CONFIG.slider.effect,
+    speed: CONFIG.slider.speed || CONFIG.theme.sliderSpeed || 1000,
+    loop: CONFIG.slider.loop,
+    pagination: { el: '.swiper-pagination', clickable: true },
+    on: {
+      init: function() { applyAnim(this.slides[this.activeIndex]); },
+      slideChange: function() {
+        this.slides.forEach(s => { const m = s.querySelector('.slide-media'); if (m) m.classList.remove('animation'); });
+        applyAnim(this.slides[this.activeIndex]);
+      }
+    }
+  };
+  if (CONFIG.slider.mousewheel) opts.mousewheel = { invert: false, thresholdDelta: 50, sensitivity: 1 };
+  swiperInstance = new Swiper('.swiper-container', opts);
+}
+
+function applyAnim(slide) {
+  const m = slide ? slide.querySelector('.slide-media') : null;
+  if (m) m.classList.add('animation');
+}
+
+// ── UTILS ────────────────────────────────
+function esc(s) {
+  if (!s) return '';
+  return s.replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+}
+function edToast(msg) {
+  const t = document.getElementById('ed-toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(edToast._timer);
+  edToast._timer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── EDITOR OPEN/CLOSE ────────────────────
+function toggleEditor() {
+  const ed = document.getElementById('rs-editor');
+  ed.classList.toggle('open');
+  if (ed.classList.contains('open')) populateEditor();
+}
+function openEditor() {
+  document.getElementById('rs-editor').classList.add('open');
+  populateEditor();
+}
+
+function edTab(name) {
+  document.querySelectorAll('.ed-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.ed-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`[data-tab="${name}"]`).classList.add('active');
+  document.getElementById('edp-' + name).classList.add('active');
+}
+
+// ── POPULATE EDITOR ──────────────────────
+function populateEditor() {
+  // Theme
+  document.getElementById('ecp').value = CONFIG.theme.primaryColor;
+  document.getElementById('ecs').value = CONFIG.theme.secondaryColor;
+  document.getElementById('esw1').style.background = CONFIG.theme.primaryColor;
+  document.getElementById('esw2').style.background = CONFIG.theme.secondaryColor;
+  document.getElementById('ecpv').textContent = CONFIG.theme.primaryColor;
+  document.getElementById('ecsv').textContent = CONFIG.theme.secondaryColor;
+  document.getElementById('ebgf').value = CONFIG.theme.backgroundFilter;
+  // Footer btn
+  document.getElementById('efbt').value = CONFIG.footer.button.text;
+  document.getElementById('efbl').value = CONFIG.footer.button.link;
+  // Logo
+  document.getElementById('elogu').value = CONFIG.logo.image && !CONFIG.logo.image.startsWith('data:') ? CONFIG.logo.image : '';
+  if (CONFIG.logo.image) {
+    document.getElementById('ed-logo-img').src = CONFIG.logo.image;
+    document.getElementById('ed-logo-prev').style.display = 'block';
+  }
+  // Fonts
+  const tf = CONFIG.theme.titleFont.replace(/'/g,'').split(',')[0].trim();
+  document.querySelectorAll('#efg-title .ed-font-opt').forEach(o => {
+    o.classList.toggle('active', o.querySelector('.ed-font-name').textContent.toLowerCase() === tf.toLowerCase());
+  });
+  const bf = CONFIG.theme.fontFamily.replace(/'/g,'').split(',')[0].trim();
+  document.querySelectorAll('#efg-body .ed-font-opt').forEach(o => {
+    o.classList.toggle('active', o.querySelector('.ed-font-name').textContent.toLowerCase() === bf.toLowerCase());
+  });
+  // Slides list
+  edRenderSlides();
+  // Footer features
+  edRenderFooterFeatures();
+}
+
+// ── SLIDES ───────────────────────────────
+function edRenderSlides() {
+  const list = document.getElementById('ed-slides-list');
+  list.innerHTML = CONFIG.slides.map((s,i) => `
+    <div class="ed-slide-item${edCurrentSlide===i?' active':''}" onclick="edSelectSlide(${i})">
+      <div class="ed-slide-num">${i+1}</div>
+      <div class="ed-slide-title">${esc(s.title||'Sin título')}</div>
+      <button class="ed-slide-del" onclick="edDelSlide(${i},event)"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  `).join('');
+}
+
+function edSelectSlide(idx) {
+  edCurrentSlide = idx;
+  const s = CONFIG.slides[idx];
+  const ed = document.getElementById('ed-slide-editor');
+  ed.classList.add('open');
+  document.getElementById('ed-slide-label').textContent = `Editando slide #${idx+1}`;
+  document.getElementById('eds-title').value = s.title || '';
+  document.getElementById('eds-desc').value = s.description || '';
+  document.getElementById('eds-type').value = s.media.type || 'image';
+  document.getElementById('eds-pos').value = s.media.position || '';
+  document.getElementById('eds-vidurl').value = s.media.videoUrl || s.media.url || '';
+  const isImg = (s.media.type||'image') === 'image';
+  document.getElementById('eds-img-wrap').style.display = isImg ? '' : 'none';
+  document.getElementById('eds-vid-wrap').style.display = isImg ? 'none' : '';
+  if (s.media.url && isImg) {
+    document.getElementById('eds-preview-img').src = s.media.url;
+    document.getElementById('eds-preview').style.display = '';
+  } else {
+    document.getElementById('eds-preview').style.display = 'none';
+  }
+  edRenderSlides();
+}
+
+function edUpdateSlide(field, value) {
+  if (edCurrentSlide === null) return;
+  const s = CONFIG.slides[edCurrentSlide];
+  if (field === 'title') { s.title = value; edRenderSlides(); rebuildLive(); }
+  else if (field === 'description') { s.description = value; rebuildLive(); }
+  else if (field === 'position') { s.media.position = value; }
+  else if (field === 'type') {
+    s.media.type = value;
+    document.getElementById('eds-img-wrap').style.display = value === 'image' ? '' : 'none';
+    document.getElementById('eds-vid-wrap').style.display = value === 'video' ? '' : 'none';
+  }
+  else if (field === 'videoUrl') { s.media.url = value; s.media.videoUrl = value; }
+}
+
+function edAddSlide() {
+  CONFIG.slides.push({ title: 'Nueva diapositiva', description: 'Descripción aquí.', media: { type: 'image', url: '', position: '50% 50%' } });
+  edRenderSlides();
+  edSelectSlide(CONFIG.slides.length - 1);
+  edToast('Diapositiva añadida');
+}
+
+function edDelSlide(idx, e) {
+  e.stopPropagation();
+  if (CONFIG.slides.length <= 1) { edToast('Debe haber al menos 1 diapositiva'); return; }
+  CONFIG.slides.splice(idx, 1);
+  if (edCurrentSlide >= CONFIG.slides.length) edCurrentSlide = CONFIG.slides.length - 1;
+  rebuildLive();
+  edRenderSlides();
+  if (edCurrentSlide !== null) edSelectSlide(edCurrentSlide);
+}
+
+function edUploadImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { edToast('Imagen muy grande (máx 5MB)'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const data = ev.target.result;
+    CONFIG.slides[edCurrentSlide].media.url = data;
+    document.getElementById('eds-preview-img').src = data;
+    document.getElementById('eds-preview').style.display = '';
+    edRenderSlides();
+    rebuildLive();
+    edToast('Imagen cargada ✓');
+  };
+  reader.readAsDataURL(file);
+}
+
+function edClearImg() {
+  if (edCurrentSlide === null) return;
+  CONFIG.slides[edCurrentSlide].media.url = '';
+  document.getElementById('eds-preview').style.display = 'none';
+  rebuildLive();
+}
+
+// ── THEME APPLY ──────────────────────────
+function edApplyTheme() {
+  const p = document.getElementById('ecp').value;
+  const s = document.getElementById('ecs').value;
+  document.getElementById('esw1').style.background = p;
+  document.getElementById('esw2').style.background = s;
+  document.getElementById('ecpv').textContent = p;
+  document.getElementById('ecsv').textContent = s;
+  CONFIG.theme.primaryColor = p;
+  CONFIG.theme.secondaryColor = s;
+  CONFIG.theme.backgroundFilter = document.getElementById('ebgf').value;
+  applyCSSVars();
+}
+
+function edFont(type, fontName) {
+  event.currentTarget.closest('.ed-font-grid').querySelectorAll('.ed-font-opt').forEach(o => o.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  if (type === 'title') CONFIG.theme.titleFont = `'${fontName}', cursive`;
+  else CONFIG.theme.fontFamily = `'${fontName}', sans-serif`;
+  applyFonts();
+  applyCSSVars();
+  rebuildLive();
+}
+
+// ── FOOTER ───────────────────────────────
+function edRenderFooterFeatures() {
+  const list = document.getElementById('ed-footer-list');
+  list.innerHTML = CONFIG.footer.features.map((f,i) => `
+    <div style="background:#1c1c24;border:1px solid rgba(255,255,255,0.08);border-radius:5px;padding:10px;margin-bottom:6px">
+      <div style="display:flex;gap:6px;margin-bottom:6px;align-items:center">
+        <input class="ed-input" value="${esc(f.icon)}" placeholder="fa-house" style="flex:1;font-size:11px" oninput="edUpdateFeature(${i},'icon',this.value)">
+        <button onclick="edDelFeature(${i})" style="background:none;border:none;color:#ff6060;cursor:pointer">×</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <input class="ed-input" value="${esc(f.label)}" placeholder="Etiqueta" style="font-size:11px" oninput="edUpdateFeature(${i},'label',this.value)">
+        <input class="ed-input" value="${esc(f.detail)}" placeholder="Detalle" style="font-size:11px" oninput="edUpdateFeature(${i},'detail',this.value)">
+      </div>
+    </div>
+  `).join('');
+}
+
+function edUpdateFeature(idx, field, val) { CONFIG.footer.features[idx][field] = val; }
+function edAddFeature() { CONFIG.footer.features.push({icon:'fa-star',label:'Nuevo',detail:'detalle'}); edRenderFooterFeatures(); }
+function edDelFeature(idx) { CONFIG.footer.features.splice(idx,1); edRenderFooterFeatures(); }
+function edRebuildFooter() {
+  CONFIG.footer.button.text = document.getElementById('efbt').value;
+  CONFIG.footer.button.link = document.getElementById('efbl').value;
+  buildFooter();
+}
+
+function edUpdateLogoFromUrl() {
+  const url = document.getElementById('elogu').value;
+  CONFIG.logo.image = url;
+  buildLogo();
+}
+function edUploadLogo(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    CONFIG.logo.image = ev.target.result;
+    document.getElementById('ed-logo-img').src = ev.target.result;
+    document.getElementById('ed-logo-prev').style.display = 'block';
+    buildLogo();
+    edToast('Logo cargado ✓');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── LIVE REBUILD ─────────────────────────
+function rebuildLive() {
+  buildSlider();
+  buildFooter();
+  buildLogo();
+  setTimeout(() => initSwiper(), 50);
+}
+
+// ── SAVE / DOWNLOAD ──────────────────────
+function edSaveLocal() {
+  localStorage.setItem('rs_config', JSON.stringify(CONFIG));
+  edToast('Guardado en localStorage ✓');
+}
+function edDownloadConfig() {
+  const blob = new Blob([JSON.stringify(CONFIG, null, 2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'config.json'; a.click();
+  edToast('config.json descargado ✓');
+}
+function edReset() {
+  if (!confirm('¿Restaurar la configuración original? Se perderán los cambios locales.')) return;
+  localStorage.removeItem('rs_config');
+  location.reload();
+}
+
+// ── START ────────────────────────────────
+boot();
+</script>
+</body>
+</html>
